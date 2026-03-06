@@ -1,0 +1,13 @@
+Date,Organization Plan,Entity Name,Entity Type,CSP,Region,Warehouse ID,Service ID,Compute Cost,Storage Cost,Network Cost,Request Cost,Other Cost,Total Cost
+2024-01-01,Pro,Acme Corp,Organization,AWS,us-east-1,wh-001,svc-compute,12.50,2.30,0.80,0.10,0.00,15.70
+2024-01-01,Free,Beta Inc,Team,GCP,eu-west-1,wh-002,svc-storage,0.00,4.50,0.20,0.05,0.00,4.75
+2024-01-01,Enterprise,Gamma LLC,Organization,Azure,us-west-2,wh-003,svc-network,8.00,1.00,3.50,0.25,1.00,13.75
+2024-01-02,Pro,Acme Corp,Organization,AWS,us-east-1,wh-001,svc-compute,13.00,2.30,0.90,0.10,0.00,16.30
+2024-01-02,Free,Beta Inc,Team,GCP,eu-west-1,wh-002,svc-storage,0.00,4.80,0.25,0.05,0.00,5.10
+2024-01-02,Enterprise,Gamma LLC,Organization,Azure,us-west-2,wh-003,svc-network,9.00,1.20,3.60,0.30,0.50,14.60
+2024-01-03,Pro,Acme Corp,Organization,AWS,us-east-1,wh-001,svc-compute,11.00,2.10,0.75,0.08,0.00,13.93
+2024-01-03,Free,Beta Inc,Team,GCP,eu-west-1,wh-002,svc-storage,,4.20,0.18,0.04,,4.42
+2024-01-03,Enterprise,Gamma LLC,Organization,Azure,us-west-2,wh-003,svc-network,7.50,0.90,3.20,0.20,0.75,12.55
+2024-01-04,Pro,Delta Co,Team,AWS,ap-southeast-1,wh-004,svc-requests,5.00,0.50,1.00,2.00,0.00,8.50
+2024-01-04,Pro,Acme Corp,Organization,AWS,us-east-1,wh-001,svc-compute,12.00,2.20,0.85,0.09,0.00,15.14
+2024-01-04,Enterprise,Gamma LLC,Organization,Azure,us-west-2,wh-003,svc-network,8.50,1.10,3.40,0.28,0.60,13.88
