@@ -475,6 +475,80 @@ OpenClaw in Cloudflare Sandbox uses multiple authentication layers:
 
 On Windows, Git may check out shell scripts with CRLF line endings instead of LF. This causes `start-openclaw.sh` to fail with exit code 126 inside the Linux container. Ensure your repository uses LF line endings — configure Git with `git config --global core.autocrlf input` or add a `.gitattributes` file with `* text=auto eol=lf`. See [#64](https://github.com/cloudflare/moltworker/issues/64) for details.
 
+## Cost Dashboard
+
+A lightweight Python utility is included to analyze Cloudflare billing CSV exports.
+
+### Files
+
+| File | Description |
+|------|-------------|
+| `scripts/cost_dashboard.py` | CLI script — reads a billing CSV and prints three summary tables |
+| `scripts/cost_dashboard_app.py` | Optional Streamlit UI with charts and CSV download buttons |
+| `scripts/cost_dashboard.sql` | DuckDB SQL file that produces the same three tables |
+| `scripts/requirements.txt` | Python dependencies |
+| `data/sample_billing.csv` | Synthetic sample CSV for testing (safe to commit — no real data) |
+
+### Quick Start
+
+```bash
+# Install core dependency
+pip install pandas
+
+# Run against the sample CSV
+python scripts/cost_dashboard.py --csv data/sample_billing.csv
+
+# Write output CSVs to out/
+python scripts/cost_dashboard.py --csv data/sample_billing.csv --out-dir out/
+
+# Run against your own billing export
+python scripts/cost_dashboard.py --csv statement-49f1a678-d328-41e3-b9c3-d68acb363209.csv --out-dir out/
+```
+
+### Output Tables
+
+1. **Daily Totals** — `Date`, `total_usd`, `dod_change` (day-over-day delta)
+2. **Spend by Dimensions** — total spend grouped by Organization Plan, Entity Name, Entity Type, CSP, Region, Warehouse ID, Service ID
+3. **Cost-Component Breakdown** — sum of each cost bucket (Compute, Storage, Network, Request, Other)
+
+### Streamlit Dashboard (optional)
+
+```bash
+pip install streamlit
+streamlit run scripts/cost_dashboard_app.py
+```
+
+The UI lets you upload a CSV (or use the included sample) and displays all three tables plus a daily spend line chart and a cost-component bar chart, with CSV download buttons.
+
+### DuckDB SQL
+
+If you have [DuckDB](https://duckdb.org/) installed you can run the same queries directly:
+
+```bash
+duckdb -c "SET VARIABLE csv_path='data/sample_billing.csv'; .read scripts/cost_dashboard.sql"
+```
+
+### Expected CSV Schema
+
+The billing CSV must include the following columns (additional columns are ignored):
+
+| Column | Type |
+|--------|------|
+| `Date` | Date (`YYYY-MM-DD`) |
+| `Organization Plan` | string |
+| `Entity Name` | string |
+| `Entity Type` | string |
+| `CSP` | string |
+| `Region` | string |
+| `Warehouse ID` | string |
+| `Service ID` | string |
+| `Compute Cost` | numeric (blank treated as 0) |
+| `Storage Cost` | numeric (blank treated as 0) |
+| `Network Cost` | numeric (blank treated as 0) |
+| `Request Cost` | numeric (blank treated as 0) |
+| `Other Cost` | numeric (blank treated as 0) |
+| `Total Cost` | numeric (blank treated as 0) |
+
 ## Links
 
 - [OpenClaw](https://github.com/openclaw/openclaw)

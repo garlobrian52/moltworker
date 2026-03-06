@@ -1,0 +1,10 @@
+# Core dependencies
+pandas>=1.5.0
+
+# Optional: Streamlit dashboard
+# Install with: pip install streamlit
+# streamlit>=1.30.0
+
+# Optional: DuckDB for SQL-based analysis
+# Install with: pip install duckdb
+# duckdb>=0.9.0

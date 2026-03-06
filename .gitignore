@@ -61,3 +61,11 @@ test/e2e/.dev.vars
 
 # npm config
 .npmrc
+
+# Cost dashboard output
+out/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
